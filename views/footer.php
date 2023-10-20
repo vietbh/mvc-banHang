@@ -2,7 +2,6 @@
     <div class="container-fluid bg-dark">
       <div class="row justify-content-center">
         <div class="col-12 col-md-11">
-
           <!-- Widgets - Bootstrap Brain Component -->
           <section class="py-4 py-md-5 py-xl-8">
             <div class="container-fluid overflow-hidden">

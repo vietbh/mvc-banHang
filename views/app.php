@@ -10,26 +10,27 @@
   <script src="<?=PUBLIC_URL?>src/main.js"></script>
   <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-light">
-<div class="container-fluid p-0 m-0 ">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<body >
+<div class="container-fluid p-0 m-0">
+  <section >
+    <nav class="fixed-top navbar navbar-expand-sm bg-dark navbar-dark" >
       <?php
         include 'header_top.php';
       ?>
     </nav>  
-    <header class="position-relative">
+    <header class="position-relative" style="height: 40rem; max-height: fit-content" id='home'>
       <?php
           include 'header.php';
       ?>
     </header>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
       <?php
         include 'nav.php';
       ?>
     </nav>  
     <div class="<?= $layout === 0 ? 'container': 'container-fluid'?>">
       <div class="row">
-        <div class="<?= $layout === 0 || $layout === 1  ? 'd-none': 'col-3 p-0'?> ">
+        <div class="<?= $layout >= 0  ? 'd-none': 'col-3 p-0'?> ">
           <?php  
             include 'aside.php';
           ?>
@@ -47,6 +48,7 @@
       include 'footer.php';
       ?>
     </footer>
+  </section>
 </div>
 </body>
 </html>

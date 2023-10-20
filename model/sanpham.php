@@ -32,6 +32,11 @@ class SanPham extends Database{
         from loai where anhien=1 order by thutu";
         return $this->getAll($sql);
     }
+    function sanPhamGanDay($sosp=9){
+        $sql = "SELECT id_sp, ten_sp, gia, hinh
+        from sanpham order by ngay desc limit 0, $sosp";
+        return $this->getAll($sql);
+    }
     function sanPhamXemNhieu($sosp=9){
         $sql = "SELECT id_sp, ten_sp, gia, hinh
         from sanpham order by soluotxem desc limit 0, $sosp";

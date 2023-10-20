@@ -6,7 +6,7 @@ require_once './model/sanpham.php';
 class SanPhamController {
     private $model = null;
     protected $listLoai = null;
-    public $sosp = 6;
+    public $sosp = 8;
     function __construct() {
         $this-> model = new SanPham();
         $this->listLoai = $this->model->layListLoai();
@@ -21,8 +21,8 @@ class SanPhamController {
     {
         $spnb = $this->model->sanPhamNoiBat($this->sosp);
         $spxn = $this->model->sanPhamXemNhieu($this->sosp);
+        $spgd = $this->model->sanPhamGanDay($this->sosp);
         $layout = 0;
-        $titlePage = "Vcorp";
         $viewnoidung = "home.php";
         return include 'views/app.php';
     }

@@ -1,5 +1,5 @@
 <?php include_once './views/Alert/message.php'?>
-<div class="container-fluid m-0 p-0 " >
+<div class="container-fluid m-0 p-0 " id="form_dang_nhap">
     <section class="p-3 p-md-4 p-xl-5">
       <div class="container-fluid m-0 p-0">
         <div class="card border-light-subtle shadow-sm">
@@ -10,14 +10,14 @@
                   <!-- <img class="img-fluid rounded mb-4" loading="lazy" src="./assets/img/bsb-logo-light.svg" width="245" height="80" alt=""> -->
                   <!-- <hr class="border-primary-subtle mb-4"> -->
                   <h2 class="h1 mb-4 text-wrap" style="width: 11em;">Chào mừng bạn trở lại 
-                    <span class="h1 text-warning fst-italic ">V</span>
+                    <span class="h1 text-warning fst-italic">V</span>
                     <span class="fw-bold fs-4">Corporation</span>
                 </h2>
                   <p class="lead m-0">Nếu bạn là khách hàng mới thì chào mừng và cảm ơn đã tin tưởng chúng tôi.</p>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-6" id="form_dang_nhap">
+            <div class="col-12 col-md-6" >
               <div class="card-body p-3 p-md-4 p-xl-5">
                 <div class="row" >
                   <div class="col-12">
