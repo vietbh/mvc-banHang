@@ -8,21 +8,22 @@
   <link href="<?=PUBLIC_URL?>images/rocket.png" rel="website icon" type="image/png">
   <link href="<?=PUBLIC_URL?>src/style.css" rel="stylesheet">
   <script src="<?=PUBLIC_URL?>src/main.js"></script>
-  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <script src="<?=PUBLIC_URL?>src/jquery.min.js"></script>
+  <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->
 </head>
-<body >
+<body>
 <div class="container-fluid p-0 m-0">
   <section >
-    <nav class="fixed-top navbar navbar-expand-sm bg-dark navbar-dark" >
+    <header class="fixed-top navbar navbar-expand-sm bg-dark navbar-dark" >
       <?php
         include 'header_top.php';
       ?>
-    </nav>  
-    <header class="position-relative" style="height: 40rem; max-height: fit-content" id='home'>
+    </header>  
+    <nav class="position-relative" style="height: 40rem; max-height: fit-content" id='home'>
       <?php
           include 'header.php';
       ?>
-    </header>
+    </nav>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
       <?php
         include 'nav.php';
@@ -40,7 +41,6 @@
             include 'article.php';
           ?>
         </div>
-        
       </div>
     </div>
     <footer class=" p-2 bg-dark text-white text-center">

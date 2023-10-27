@@ -8,7 +8,7 @@ class Database {
     function __construct() {
         try {
             $str = "mysql:host=".DB_HOST."; dbname=".DB_NAME."; charset=utf8"; 
-            $this->conn = new PDO($str, DB_USER,DB_PASS);
+            $this->conn = new PDO($str,DB_USER,DB_PASS);
         } catch (PDOException $e) {
             die('Khong the ket noi: '. $e->getMessage());
         }

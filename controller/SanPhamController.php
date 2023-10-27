@@ -13,7 +13,7 @@ class SanPhamController {
     }
 
     function num_format(?int $gia){
-        $tien = number_format($gia,0,'','.').' VNĐ';
+        $tien = number_format($gia,0,'','.').'<span class="fw-bold text-decoration-underline">đ</span>';
         return $tien;
     }
     
@@ -34,7 +34,6 @@ class SanPhamController {
         $sp = $this->model->detail($id);
         $spxn = $this->model->sanPhamXemNhieu($this->sosp);
         $layout=1;
-        $titlePage = '<strong>Chi tiết sản phẩm </strong>'.$sp['ten_sp'];
         $viewnoidung = "detail.php";
         include 'views/app.php';
     }
@@ -82,8 +81,9 @@ class SanPhamController {
 
         }
         $_SESSION['cart'][$id_sp] = $so_luong;
-        $_SESSION['message']['addsp'] = 'Đã thêm sản phẩm vào giỏ';
-        header('location:'. ROOT_URL);
+        $_SESSION['message']['addsp'] = 'Đã thêm sản phẩm vào giỏ số lượng '.$_SESSION['cart'][$id_sp];
+        
+        header('location:'. ROOT_URL.'sp?id='.$id_sp.'#sanpham');
     }
     function quatityCart()
     {
