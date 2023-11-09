@@ -118,6 +118,7 @@ class UserController{
         return include './views/app.php';
     }
     function fPass(){
+        global $params;
         $email= trim(strip_tags($_POST['email']));
         $kq = $this->model->checkEmail($email);
         if($kq == false){
@@ -127,6 +128,14 @@ class UserController{
         }else if(is_array($kq)){
             unset($_SESSION['email1']);
             $_SESSION['email'] = $email;
+            include './Mail/MailController.php';
+            
+            if($params['verify'] !== $_SESSION['verify']){
+                $_SESSION['message']['email'] ='Hãy kiểm tra gmail để xác thực';
+                header('location:'.ROOT_URL.'quen-mat-khau#form_quen_pass');
+                exit ();
+            }
+            unset($_SESSION['verify']);
             $_SESSION['showpass'] = 1;
             if(isset($_SESSION['email'])){
                 $matkhau= trim(strip_tags($_POST['pass']));
@@ -192,5 +201,25 @@ class UserController{
             $_SESSION['message']['success']='Đổi mật khẩu thành công';
             return header('location:'.ROOT_URL);
         }
+    }
+    public function contact(){
+        $layout =1;
+        $viewnoidung = './Mail/contact.php';
+        return include './views/app.php';
+    }
+    public function f_contact(){
+        echo 'hehe';
+        $tieude = 'Mail quên mật khẩu'; 
+        $email = trim(strip_tags($_POST['email']));
+        $passVerify = substr(md5(rand(0,99999)),0,8);
+        $_SESSION['verify'] = $passVerify;
+        $noidungthu = 'Nội dung thư
+            <br>
+            <a href="http://mvc-banhang.test'.ROOT_URL.'quen-mat-khau?verify='.$passVerify.'">Click để xác nhận</a>
+        '; 
+        include './Mail/MailController.php';
+        // $layout =1;
+        // $viewnoidung = './Mail/contact.php';
+        // return include './views/app.php';
     }
 }

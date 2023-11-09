@@ -60,8 +60,7 @@
             <button class="<?= strpos($url, 'chitietdonhang') === false ? '' : 'active';
                             strpos($url, 'chitietdonhang') === false ? '' : 'active';
                             ?> btn btn text-light btn-outline-success dropdown-toggle m-0">
-              Xin chào
-              <?= $_SESSION['user']['name'] ?>
+              Xin chào <?= $_SESSION['user']['name'] ?>
             </button>
           </a>
           <ul class="dropdown-menu">

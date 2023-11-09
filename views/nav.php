@@ -7,9 +7,9 @@
           extract($value);
         ?>
           <li>
-            <a class="nav-link " href="<?=ROOT_URL."loai?idloai=".$value['id_loai'].'&page=2'; ?>">
-              <button class="<?= ROOT_URL."loai?idloai=".$value['id_loai'].'&page=2' == $url?'active':'' ?>  btn btn text-light btn-outline-success">
-                <?=$value['ten_loai'] ?> 
+            <a class="nav-link " href="<?=ROOT_URL."loai?idloai=".$value['id_loai'].'&page='.($params['page']>1?$params['page']:1); ?>">
+              <button class="<?= ROOT_URL."loai?idloai=".$value['id_loai'].'&page='.$params['page'] == $url?'active':'' ?>  btn btn text-light btn-outline-success">
+                <?=mb_strtoupper($value['ten_loai']) ?> 
               </button>  
             </a>
         </li>

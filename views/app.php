@@ -9,8 +9,7 @@
   <link href="<?= PUBLIC_URL ?>src/style.css" rel="stylesheet">
   <script src="<?= PUBLIC_URL ?>src/main.js"></script>
   <script src="<?= PUBLIC_URL ?>src/jquery.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/jumbotron/">
+  <link href="<?= PUBLIC_URL ?>src/bootstrap.min.css" rel="stylesheet" >
 </head>
 
 <body>
@@ -50,11 +49,12 @@
   </div>
   <div class="container-fluid p-0 m-0">
     <section>
-      <header class="fixed-top navbar navbar-expand-sm bg-dark navbar-dark">
+      <header id="header_top" class="fixed-top navbar navbar-expand-sm bg-dark navbar-dark">
         <?php
         include 'header_top.php';
         ?>
       </header>
+   
       <nav class="position-relative <?= $layout > 0  ? 'd-none' : '' ?>" style="height: 40rem; max-height: fit-content" id='home'>
         <?php
         include 'header.php';
