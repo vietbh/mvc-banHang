@@ -28,7 +28,7 @@
             )
         ));
         $mail->send();
-        echo"Ok";
+        return;
     } catch (Exception $e) {
         echo 'Mail không gửi được. Lỗi: ', $mail->ErrorInfo;
     }

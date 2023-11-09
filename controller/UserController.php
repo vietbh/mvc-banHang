@@ -106,14 +106,18 @@ class UserController{
     }
     
     function forgetPass(){
+        global $params;
         $layout =1;
         $viewnoidung = './views/TaiKhoan/f_pass.php';
         if(isset($_SESSION['email1'])){
             unset($_SESSION['email']);
             unset($_SESSION['showpass']);
         } 
-        if(isset($_SESSION['email'])){
-            $_SESSION['showpass']=1;
+        if($params['verify'] == $_SESSION['verify']){
+            $_SESSION['message']['email'] ='Xác thực thành công';
+            $_SESSION['showpass'] = 1;
+        }else{
+            unset($_SESSION['showpass']);
         }
         return include './views/app.php';
     }
@@ -121,22 +125,27 @@ class UserController{
         global $params;
         $email= trim(strip_tags($_POST['email']));
         $kq = $this->model->checkEmail($email);
-        if($kq == false){
+        if(!$kq){
             $_SESSION['email1'] = $email;
             $_SESSION['message']['email'] ='Có vẻ email này không tồn tại';    
             return header('location:'.ROOT_URL.'quen-mat-khau#form_quen_pass');
         }else if(is_array($kq)){
             unset($_SESSION['email1']);
             $_SESSION['email'] = $email;
-            include './Mail/MailController.php';
-            
-            if($params['verify'] !== $_SESSION['verify']){
-                $_SESSION['message']['email'] ='Hãy kiểm tra gmail để xác thực';
+            if(!isset($_SESSION['showpass']) ){    
+                $tieude = 'Mail quên mật khẩu'; 
+                $passVerify = substr(md5(rand(0,99999)),0,8);
+                $_SESSION['verify'] = $passVerify;
+                $noidungthu = 'Xác thực để khôi phục mật khẩu
+                    <br>
+                    <a href="http://mvc-banhang.test'.ROOT_URL.'quen-mat-khau?verify='.$passVerify.'">Click để xác nhận</a>
+                '; 
+                include_once './Mail/MailController.php';
+                
+                $_SESSION['message']['email'] ='Chúng tôi đã gửi gmail để xác thực';
                 header('location:'.ROOT_URL.'quen-mat-khau#form_quen_pass');
-                exit ();
             }
-            unset($_SESSION['verify']);
-            $_SESSION['showpass'] = 1;
+            
             if(isset($_SESSION['email'])){
                 $matkhau= trim(strip_tags($_POST['pass']));
                 $matkhau1=trim(strip_tags($_POST['pass1']));
@@ -208,7 +217,7 @@ class UserController{
         return include './views/app.php';
     }
     public function f_contact(){
-        echo 'hehe';
+        
         $tieude = 'Mail quên mật khẩu'; 
         $email = trim(strip_tags($_POST['email']));
         $passVerify = substr(md5(rand(0,99999)),0,8);
