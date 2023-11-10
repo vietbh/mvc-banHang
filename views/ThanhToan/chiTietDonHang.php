@@ -3,13 +3,13 @@
 
 
 <!-- Modal -->
-<section class="mt-4 mb-2 p-3" style="height: 40rem;">
-<div class="container-fluid" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-  <div class="modal-dialog modal-dialog-scrollable">
+<section class="mt-2 mb-4 p-3" >
+<div class="container" id="exampleModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog ">
     <div class="modal-content">
       <div class="text-center">
-        <h1 class="modal-title fs-2" id="exampleModalLabel">Chi tiết đơn hàng</h1>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        <h1 class="modal-title fs-2 mb-2" id="exampleModalLabel">Chi tiết đơn hàng</h1>
+        <hr>
       </div>
       <div class="modal-body" >
         <div class="row" style="height: 30em;">

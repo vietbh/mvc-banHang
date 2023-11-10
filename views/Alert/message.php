@@ -1,8 +1,8 @@
 <?php
 if (isset($_SESSION['message']['success']) || isset($_SESSION['message']['logout']) || isset($_SESSION['message']['addsp']) || isset($_SESSION['message']['fPass'])) {
 ?>
-    <div class="toast-container position-fixed top-0 end-0 p-1 mt-4">
-        <div id="liveToast" class="toast rounded rounded-4" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-container position-fixed top-0 start-0 p-1 pt-4 mt-4">
+        <div id="liveToast" class="toast rounded rounded-4 mt-4" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-body bg-success rounded rounded-4">
                 <p class="fs-6 fw-light text-light pb-0 mb-0 text-start">
                     <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,10 +36,10 @@ if (isset($_SESSION['message']['error'])) {
     </div>
 <?php } ?>
 <script>
-    const toastLiveExample = document.getElementById('liveToast')
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-    toastBootstrap.show()
+    const toastLiveExample = document.getElementById('liveToast');
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+    toastBootstrap.show();
     setTimeout(function() {
         <?php if (isset($_SESSION['message'])) unset($_SESSION['message']); ?>
-    }, 11000)
+    }, 9000);
 </script>

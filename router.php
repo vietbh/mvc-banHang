@@ -16,6 +16,7 @@ $router = [
             'dangxuat' =>[new UserController, 'dangxuat'] , 
             'doimatkhau' =>[new UserController, 'changePass'] , 
             'quenmatkhau' =>[new UserController, 'forgetPass'] , 
+            'lienhe' =>[new UserController,'contact'] ,
             'admin/sanpham' =>[new AdminSanPhamController, 'index'] , 
             // filter
             'admin/sanpham/locsanpham' =>[new AdminSanPhamController, 'index'] , 
@@ -38,7 +39,7 @@ $router = [
             'dangki' =>[new UserController, 'sign'] , 
             'doimatkhau' =>[new UserController, 'cPass'] , 
             'quenmatkhau' =>[new UserController, 'fPass'] , 
-            
+            'lienhe' =>[new UserController,'f_contact'] ,
             'admin/sanpham/filter' =>[new AdminSanPhamController, 'show'] , 
             
             'admin/store' =>[new AdminSanPhamController, 'store'] , 

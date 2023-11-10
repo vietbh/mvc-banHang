@@ -2,6 +2,7 @@
 session_start();
 session_regenerate_id(true);
 require_once 'model/user.php';
+require_once'./Mail/MailController.php';
 class UserController{
     private $model = null;
     public function __construct() {
@@ -27,6 +28,8 @@ class UserController{
             $_SESSION['user']['name'] = $kq['hoten'];
             $_SESSION['user']['email'] = $kq['email'];
             $_SESSION['user']['role'] = $kq['vaitro'];
+            $_SESSION['user']['phone'] = $kq['dienthoai'];
+            $_SESSION['user']['diachi'] = $kq['diachi'];
             $_SESSION['user']['pass']=$pass;
             $_SESSION['message']['success'] = 'Đăng nhập thành công';
             return header('location:'.ROOT_URL);
@@ -106,28 +109,45 @@ class UserController{
     }
     
     function forgetPass(){
+        global $params;
         $layout =1;
         $viewnoidung = './views/TaiKhoan/f_pass.php';
         if(isset($_SESSION['email1'])){
             unset($_SESSION['email']);
             unset($_SESSION['showpass']);
         } 
-        if(isset($_SESSION['email'])){
-            $_SESSION['showpass']=1;
+        if(isset($params['verify']) &&$params['verify'] == $_SESSION['verify']){
+            $_SESSION['message']['email'] ='Xác thực thành công';
+            $_SESSION['showpass'] = 1;
+        }else{
+            unset($_SESSION['showpass']);
         }
         return include './views/app.php';
     }
     function fPass(){
+        global $params;
         $email= trim(strip_tags($_POST['email']));
         $kq = $this->model->checkEmail($email);
-        if($kq == false){
+        if(!$kq){
             $_SESSION['email1'] = $email;
             $_SESSION['message']['email'] ='Có vẻ email này không tồn tại';    
             return header('location:'.ROOT_URL.'quen-mat-khau#form_quen_pass');
         }else if(is_array($kq)){
             unset($_SESSION['email1']);
             $_SESSION['email'] = $email;
-            $_SESSION['showpass'] = 1;
+            if(!isset($_SESSION['showpass']) ){    
+                $tieude = 'Mail quên mật khẩu'; 
+                $passVerify = substr(md5(rand(0,99999)),0,8);
+                $_SESSION['verify'] = $passVerify;
+                $noidungthu = 'Xác thực để khôi phục mật khẩu
+                    <br>
+                    <a href="http://mvc-banhang.test'.ROOT_URL.'quen-mat-khau?verify='.$passVerify.'">Click để xác nhận</a>
+                '; 
+                GuiMail($email,$tieude,$noidungthu);
+                $_SESSION['message']['email'] ='Chúng tôi đã gửi gmail để xác thực';
+                header('location:'.ROOT_URL.'quen-mat-khau#form_quen_pass');
+            }
+            
             if(isset($_SESSION['email'])){
                 $matkhau= trim(strip_tags($_POST['pass']));
                 $matkhau1=trim(strip_tags($_POST['pass1']));
@@ -192,5 +212,25 @@ class UserController{
             $_SESSION['message']['success']='Đổi mật khẩu thành công';
             return header('location:'.ROOT_URL);
         }
+    }
+    public function contact(){
+        $layout =1;
+        $viewnoidung = './Mail/contact.php';
+        return include './views/app.php';
+    }
+    public function f_contact(){
+        
+        $tieude = 'Mail quên mật khẩu'; 
+        $email = trim(strip_tags($_POST['email']));
+        $passVerify = substr(md5(rand(0,99999)),0,8);
+        $_SESSION['verify'] = $passVerify;
+        $noidungthu = 'Nội dung thư
+            <br>
+            <a href="http://mvc-banhang.test'.ROOT_URL.'quen-mat-khau?verify='.$passVerify.'">Click để xác nhận</a>
+        '; 
+        include './Mail/MailController.php';
+        // $layout =1;
+        // $viewnoidung = './Mail/contact.php';
+        // return include './views/app.php';
     }
 }

@@ -77,13 +77,15 @@ class SanPham extends Database{
         }
         return $row['dem'];
     }
-    function xuatDonHang($hoten, $phone, $email, $diachi){
+    function xuatDonHang($id_user,$hoten, $phone, $email, $diachi){
         $sql = "INSERT INTO donhang set 
+        id_user =:id,
         hoten =:ht, 
         dienthoai =:dt, 
         email=:em, 
         diachi=:dc";
         $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":id",$id_user,PDO::PARAM_INT);
         $stmt->bindParam(":ht",$hoten,PDO::PARAM_STR);
         $stmt->bindParam(":dt",$phone,PDO::PARAM_INT);
         $stmt->bindParam(":em",$email,PDO::PARAM_STR);
@@ -92,7 +94,6 @@ class SanPham extends Database{
         $id_dh = $this->conn->lastInsertId();
         return $id_dh;
     }
-
     function luuSPGioHang($id_dh){
         foreach ($_SESSION['cart'] as $id_sp => $soluong) {
             $sp = $this->detail($id_sp);
@@ -111,10 +112,12 @@ class SanPham extends Database{
             $stmt ->execute();
         }
     }
-    function showDonHangs(){
-        $sql="SELECT * FROM donhang order by id_dh desc";
-        $stmt = $this->getAll($sql);
-        return $result = $stmt;
+    function showDonHangs($id){
+        $sql="SELECT * FROM donhang where id_user=:id_user";
+        $stmt = $this->conn->prepare($sql);
+        $stmt ->bindParam(":id_user", $id,PDO::PARAM_INT);
+        $stmt ->execute();
+        return $result = $stmt->fetchAll();;
     }
     function showDonHang(?int $id_dh){
         $sql="SELECT * FROM donhang where id_dh = $id_dh";
