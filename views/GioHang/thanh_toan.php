@@ -45,7 +45,7 @@
         <div>
             <p class="fw-bold">Trả tiền mặt khi nhận hàng</p>
             <p class="fst-italic">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, delectus tenetur dolore minima necessitatibus explicabo accusamus odit voluptatum repellendus voluptates, ipsum nam iusto. In error dolorum tenetur ipsum sapiente dolore!</p>
-            <a href="<?= ROOT_URL.'checkout'?>">
+            <a href="<?= ROOT_URL.'checkout#form_checkout'?>">
                 <button class="btn btn-outline-warning">Tiến hành thanh toán</button>
             </a>
         </div>

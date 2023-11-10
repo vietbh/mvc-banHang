@@ -2,6 +2,7 @@
 session_start();
 session_regenerate_id(true);
 require_once 'model/user.php';
+require_once'./Mail/MailController.php';
 class UserController{
     private $model = null;
     public function __construct() {
@@ -27,6 +28,8 @@ class UserController{
             $_SESSION['user']['name'] = $kq['hoten'];
             $_SESSION['user']['email'] = $kq['email'];
             $_SESSION['user']['role'] = $kq['vaitro'];
+            $_SESSION['user']['phone'] = $kq['dienthoai'];
+            $_SESSION['user']['diachi'] = $kq['diachi'];
             $_SESSION['user']['pass']=$pass;
             $_SESSION['message']['success'] = 'Đăng nhập thành công';
             return header('location:'.ROOT_URL);
@@ -113,7 +116,7 @@ class UserController{
             unset($_SESSION['email']);
             unset($_SESSION['showpass']);
         } 
-        if($params['verify'] == $_SESSION['verify']){
+        if(isset($params['verify']) &&$params['verify'] == $_SESSION['verify']){
             $_SESSION['message']['email'] ='Xác thực thành công';
             $_SESSION['showpass'] = 1;
         }else{
@@ -140,8 +143,7 @@ class UserController{
                     <br>
                     <a href="http://mvc-banhang.test'.ROOT_URL.'quen-mat-khau?verify='.$passVerify.'">Click để xác nhận</a>
                 '; 
-                include_once './Mail/MailController.php';
-                
+                GuiMail($email,$tieude,$noidungthu);
                 $_SESSION['message']['email'] ='Chúng tôi đã gửi gmail để xác thực';
                 header('location:'.ROOT_URL.'quen-mat-khau#form_quen_pass');
             }

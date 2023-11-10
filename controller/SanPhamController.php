@@ -1,9 +1,9 @@
 <?php
 session_start();
-session_regenerate_id(true);
+
 require_once './model/sanpham.php';
 
-class SanPhamController {
+class SanPhamController extends Auth{
     private $model = null;
     protected $listLoai = null;
     public $sosp = 8;
@@ -130,18 +130,24 @@ class SanPhamController {
         return header('location:'.ROOT_URL.'giohang');
     }
     function checkout(){
-        $layout = 0;
+        $this->user();
+        if(!isset($_SESSION['cart']) ||count($_SESSION['cart']) == 0){
+            header('Location:'.ROOT_URL);
+            exit();
+        }
+        $layout = 1;
         $titlePage = 'Tiến hành đặt hàng';
         $viewnoidung = 'views/ThanhToan/checkout.php';
         return include 'views/app.php';
     }
 
     function bill(){
+        $id_user = ($_POST['id_user']);
         $hoten = trim(strip_tags($_POST['hoten']));
         $phone = trim(strip_tags($_POST['phone']));
         $email = trim(strip_tags($_POST['email']));
         $diachi = trim(strip_tags($_POST['diachi']));
-        $id_dh = $this->model->xuatDonHang($hoten, $phone, $email, $diachi);
+        $id_dh = $this->model->xuatDonHang($id_user,$hoten, $phone, $email, $diachi);
         $this->model->luuSPGioHang($id_dh);
         unset($_SESSION['cart']); 
         $thongbao = $id_dh;
@@ -149,9 +155,10 @@ class SanPhamController {
         return header('location:'.ROOT_URL.'chitietdonhang');
     }
     function detailCheckout(){
+        $this->user();
         $layout = 1;
         $titlePage = 'Đơn hàng';
-        $donHangs = $this->model->showDonHangs();
+        $donHangs = $this->model->showDonHangs($_SESSION['user']['id_user']);
         $viewnoidung = 'views/ThanhToan/donHang.php';
         return include 'views/app.php';
     }

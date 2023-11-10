@@ -67,7 +67,8 @@
             <li><a class="dropdown-item" href="#">Thông tin khách hàng</a></li>
             <li><a class="dropdown-item " <?= $_SESSION['user']['role'] === 1 ? '' : 'hidden' ?> href="<?= ROOT_URL ?>admin/san-pham">Trang quản lí</a></li>
             <li><a class="dropdown-item" href="<?= ROOT_URL ?>doimatkhau#form_c_pass">Đổi mật khẩu</a></li>
-            <li><a class="dropdown-item" href="<?= ROOT_URL . 'chitietdonhang#don_hang' ?>">Chi tiết đơn hàng</a></li>
+            <li><a class="dropdown-item" href="<?= ROOT_URL ?>checkout">Tiến hành đặt hàng</a></li>
+            <li><a class="dropdown-item" href="<?= ROOT_URL . 'chitietdonhang#don_hang' ?>">Đơn hàng</a></li>
             <li><a class="dropdown-item" href="<?= ROOT_URL ?>dangxuat">Đăng xuất</a></li>
           </ul>
         </li>

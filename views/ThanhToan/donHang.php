@@ -82,7 +82,7 @@
             <form action="<?=ROOT_URL?>chitietdonhang" method="post">
               <input type="text" hidden name="id_dh" value="<?=$donHang['id_dh']?>">
               <button type="submit" class="btn border border-primary border-2 border-top-0 border-end-0 border-start-0 py-0 px-4 " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <?=$donHang['id_dh']?>
+                ĐH<?=$donHang['id_dh']?>
               </button>  
             </form>
           </td>
@@ -93,9 +93,22 @@
           <td><?=$donHang['diachi']?></td>
           <td><?=$donHang['trang thai'] !== 0? 'Chưa thanh toán':'Đã thanh toán'?></td>
         </tr>
-        <?php }
-        if(isset($modal))
-          include $modal;
+        <?php 
+          }
+          // if(isset($modal))include $modal;
+        ?>
+        <?php
+          if($index == 0){
+        ?> 
+            <tr>
+              <td colspan="8" class="text-center">
+                <p class="my-2 fs-2 fw-medium">
+                  Bạn chưa có đơn hàng nào !
+                </p>
+              </td>
+            </tr>
+        <?php
+          }
         ?>
       
     </tbody>

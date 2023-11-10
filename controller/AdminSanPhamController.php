@@ -1,16 +1,8 @@
 <?php
 require_once 'model/sanpham.php';
-session_start();
 
-
-class AdminSanPhamController{
+class AdminSanPhamController extends Auth{
     private $model = null;
-    protected function role(){
-        if (!isset($_SESSION['user']['role']) || $_SESSION['user']['role'] < 1) {
-            include './views/Alert/401.php';
-            exit();
-        }
-    }
     public function __construct() {
         $this->model = new AdminSanPham();
     }

@@ -2,7 +2,7 @@
     require "PHPMailer/src/PHPMailer.php"; 
     require "PHPMailer/src/SMTP.php"; 
     require 'PHPMailer/src/Exception.php'; 
-
+function GuiMail( $email,  $tieude, $noidungthu ) {
     $mail = new PHPMailer\PHPMailer\PHPMailer(true);//true:enables exceptions
     try {
         $mail->SMTPDebug = 0; //0,1,2: chế độ debug. khi chạy ngon thì chỉnh lại 0 nhé
@@ -28,10 +28,11 @@
             )
         ));
         $mail->send();
-        return;
+        return true;
     } catch (Exception $e) {
         echo 'Mail không gửi được. Lỗi: ', $mail->ErrorInfo;
+        return false;
     }
-
+}
 ?>
  
